@@ -1,0 +1,86 @@
+# Miniature Goose — Upptime Configuration
+# https://upptime.js.org/docs/configuration
+
+owner: Miniature-Goose
+repo: status
+
+# ── Monitors ──────────────────────────────────────────────────
+sites:
+  - name: Client Portal
+    url: https://miniaturegoose.com
+    expectedStatusCodes:
+      - 200
+      - 301
+      - 302
+
+  - name: Game Panel
+    url: https://miniaturegoose.com/dashboard
+    expectedStatusCodes:
+      - 200
+      - 302
+
+  - name: API
+    url: https://miniaturegoose.com/api/v1/health
+    expectedStatusCodes:
+      - 200
+
+  - name: Documentation
+    url: https://miniaturegoose.com/docs/
+    expectedStatusCodes:
+      - 200
+
+  - name: Billing & Payments
+    url: https://miniaturegoose.com/store
+    expectedStatusCodes:
+      - 200
+      - 302
+
+  - name: Wings (US-East)
+    url: $WINGS_URL
+    expectedStatusCodes:
+      - 200
+      - 401
+
+# ── Status page settings ─────────────────────────────────────
+status-website:
+  cname: status.miniaturegoose.com
+  baseUrl: /
+  logoUrl: https://miniaturegoose.com/images/logo.png
+  name: Miniature Goose Status
+  theme: dark
+  customJs: "window.__MG_STATUS = true;"
+  customCss: |
+    /* MG theme override — see BUILD_INSTRUCTIONS.md for the full
+       design system. This is the minimal starter; the full theme
+       gets built out per the instructions doc. */
+
+# ── Notifications (configure secrets in repo settings) ────────
+notifications:
+  # - type: discord
+  #   channel: status-alerts
+  #   webhook: $DISCORD_WEBHOOK
+
+# ── Workflow schedule ─────────────────────────────────────────
+workflowSchedule:
+  graphs: "0 0 * * *"       # daily uptime graph rebuild
+  responseTime: "0 23 * * *" # daily response time update
+  staticSite: "0 1 * * *"   # daily site rebuild
+  summary: "0 0 * * *"      # daily summary
+  uptime: "*/5 * * * *"     # check every 5 minutes
+
+# ── Commits ───────────────────────────────────────────────────
+commitMessages:
+  statusChange: "[$SITE_NAME] $CHANGE — $STATUS"
+  graphsUpdate: "Update response time graphs"
+  summaryUpdate: "Update uptime summary [skip ci]"
+
+# ── Internationalization ──────────────────────────────────────
+i18n:
+  activeIncidents: Active Incidents
+  pastIncidents: Past Incidents
+  pastIncidentsResolved: Resolved
+  allSystemsOperational: All Systems Operational
+  notAllSystemsOperational: Not All Systems Operational
+  degradedPerformance: Degraded Performance
+  completeOutage: Complete Outage
+  partialOutage: Partial Outage
